@@ -27,6 +27,9 @@ export class UserUpdateService {
       data.login,
       data.email,
     );
+    if(user === undefined){
+      return
+    }
     if (user?.email === data.email && user?.login === data.login) {
       throw new HttpException(
         'Указанный емайл и логин заняты',

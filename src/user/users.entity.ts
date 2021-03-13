@@ -53,7 +53,7 @@ export class Users {
 
   // имя пользователя
   @Column({
-    name: 'nameLast',
+    name: 'name',
     type: 'varchar',
     length: 155,
   })
