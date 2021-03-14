@@ -8,7 +8,7 @@ import {
 
 import { Reflector } from '@nestjs/core';
 import { RoleInterface } from './role.interfaces';
-import { UserFindService } from 'src/user/server/user-find.service';
+import { UserFindService } from 'src/user/server/main/user-find.service';
 @Injectable()
 export class RolesGuard implements CanActivate {
   constructor(

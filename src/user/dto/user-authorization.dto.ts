@@ -2,7 +2,6 @@ import { IsString, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class AuthorizationUserDto {
-
   @ApiProperty()
   @IsNotEmpty({ message: 'логин обязательное поле' })
   @IsString({ message: 'логин должен является строкой' })

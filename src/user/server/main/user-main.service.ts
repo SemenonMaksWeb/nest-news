@@ -1,12 +1,12 @@
-import { HttpException, HttpStatus, Injectable, Req } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { Users } from '../users.entity';
-import { UserFindService } from './user-find.service';
-import { UserUpdateService } from './user-update.service';
-import { UserProfile } from '../interface/user-profie.intefrace';
-import { UpdateUserDto } from '../dto/update-user.dto';
+import { Users } from 'src/user/users.entity';
+import { UserFindService } from 'src/user/server/main/user-find.service';
+import { UserUpdateService } from 'src/user/server/main/user-update.service';
+import { UserProfile } from 'src/user/interface/user-profie.intefrace';
+import { UpdateUserDto } from 'src/user/dto/update-user.dto';
 
 @Injectable()
 export class UserMainService {
@@ -27,7 +27,7 @@ export class UserMainService {
       surname: user.surname,
     };
   }
-  async updateProfile(id, updateUserDto: UpdateUserDto){
+  async updateProfile(id, updateUserDto: UpdateUserDto) {
     const user = {};
     if (updateUserDto.login) {
       user['login'] = updateUserDto.login;
@@ -44,22 +44,22 @@ export class UserMainService {
     if (updateUserDto.avatar) {
       user['avatar'] = updateUserDto.avatar;
     }
-    if(Object.keys(user).length > 0){
-      await this.userUpdateService.updateUser(user, id)
-    }else{
+    if (Object.keys(user).length > 0) {
+      await this.userUpdateService.updateUser(user, id);
+    } else {
       throw new HttpException(
-        { 
-          "statusCode": 400,
-          "message": [
+        {
+          statusCode: 400,
+          message: [
             'Укажите что хотите изменить у пользователя',
             'login',
             'name',
             'patronymic',
             'surname',
-            'avatar'
-          ]
+            'avatar',
+          ],
         },
-        HttpStatus.FORBIDDEN
+        HttpStatus.FORBIDDEN,
       );
     }
   }

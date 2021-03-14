@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { UserFindService } from 'src/user/server/user-find.service';
-import { Users } from '../users.entity';
+import { UserFindService } from 'src/user/server/main/user-find.service';
+import { Users } from '../../users.entity';
 
 @Injectable()
 export class UserUpdateService {
@@ -27,8 +27,8 @@ export class UserUpdateService {
       data.login,
       data.email,
     );
-    if(user === undefined){
-      return
+    if (user === undefined) {
+      return;
     }
     if (user?.email === data.email && user?.login === data.login) {
       throw new HttpException(

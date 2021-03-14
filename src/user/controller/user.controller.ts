@@ -1,6 +1,14 @@
-import { Body, Controller, Get, Put, Request, UseGuards, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Put,
+  Request,
+  UseGuards,
+  ValidationPipe,
+} from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt-auth.guard';
-import { UserMainService } from 'src/user/server/user-main.service';
+import { UserMainService } from 'src/user/server/main/user-main.service';
 import { RolesGuard } from 'src/roles/roles.guard';
 import { RoleInterface } from 'src/roles/role.interfaces';
 import { Roles } from 'src/roles/roles.decorator';
@@ -18,8 +26,13 @@ export class UserMainController {
   @Roles([RoleInterface.users])
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Put('profile')
-  async updateProfile(@Request() req, @Body(ValidationPipe) updateUserDto: UpdateUserDto ) {
-    return await this.userMainService.updateProfile(req['userData']['id'], updateUserDto);
+  async updateProfile(
+    @Request() req,
+    @Body(ValidationPipe) updateUserDto: UpdateUserDto,
+  ) {
+    return await this.userMainService.updateProfile(
+      req['userData']['id'],
+      updateUserDto,
+    );
   }
-
 }
